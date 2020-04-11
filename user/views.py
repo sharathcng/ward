@@ -14,7 +14,9 @@ def register(request):
         forms=RegisterForms(request.POST, request.FILES)
         if forms.is_valid():
             user = forms.save()
-            return render(request,'login.html',{'obje':user})
+            complaints = Post_Complaint.objects.all()
+            context = {"complaints":complaints,"obje":user}
+            return render(request,'login.html',context)
     else:
         forms=RegisterForms()
     return render(request,'index.html',{'form':forms})
@@ -28,10 +30,14 @@ def index(request):
             check = RegisterModel.objects.get(userid=usid, password=pswd)
             request.session['userid'] = check.id
             us_id = RegisterModel.objects.get(id=check.id)
-            return render(request,'login.html',{'obje':us_id})
+            complaints = Post_Complaint.objects.all()
+            context = {"complaints":complaints,"obje":us_id}
+            return render(request,'login.html',context)
         except:
             pass
-    return render(request, 'index.html')
+    complaints = Post_Complaint.objects.all()
+    context = {"complaints":complaints}
+    return render(request, 'index.html',context)
 
 
 
@@ -50,7 +56,10 @@ def post_comp(request):
             instance = forms.save(commit=False)
             instance.user_id = current_user
             use=instance.save()
-            return render(request, 'login.html', {'obje': use})
+            complaints = Post_Complaint.objects.all()
+            context = {"complaints":complaints,"obje":use}
+            return render(request,'login.html',context)
     else:
         forms = ComplaintForms()
-    return render(request, 'login.html', {'obje': forms})
+        comp = Post_Complaint.objects.all()
+    return render(request, 'login.html', {'obje': forms},{'ob':comp})

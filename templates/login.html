@@ -184,7 +184,7 @@
                         <li>{{obje.email}}</li>
                         <li>{{obje.gender}}</li>
                     </ul>
-                    
+                    {% endblock %}
                 </div>
             </div>
             
@@ -344,28 +344,31 @@
                     <li><a href="javascript:;" class="filter" data-filter=".print">Road</a></li>
                 </ul>
             </nav>
-
+        {% for complaint in complaints %}
             <div id="projects" class="clearfix">
+                <!-- {{complaint.id}}
+                {{complaint.img}}
+                {{complaint.title}} -->       
 
                 <figure class="mix portfolio-item app">
-                    <img class="img-responsive" src="{% static 'img/portfolio/portfolio-1.jpg' %}" alt="Portfolio Item">
-                    <a href="{% static 'img/portfolio/portfolio-1.jpg' %}" title="Title One" rel="portfolio" class="fancybox"><span class="plus"></span></a>
+                    <img class="img-responsive" src="{{ complaint.img.url }}" alt="Portfolio Item">
+                    <a href="{{ complaint.img.url }}}" title="Title One" rel="portfolio" class="fancybox"><span class="plus"></span></a>
                     <figcaption class="mask">
-                        <h3>Garbage</h3>
+                        <h3>{{complaint.title}}{{complaint.user_id}}</h3>
                         <span></span>
                     </figcaption>
                 </figure>
-
-                <figure class="mix portfolio-item photography">
+            {% endfor %}
+                <!-- <figure class="mix portfolio-item photography">
                     <img class="img-responsive" src="{% static 'img/portfolio/portfolio-2.jpg' %}" alt="Portfolio Item">
                     <a href="{% static 'img/portfolio/portfolio-2.jpg' %}" title="Title Two" rel="portfolio" class="fancybox"><span class="plus"></span></a>
                     <figcaption class="mask">
                         <h3>Sanitary</h3>
                         <span></span>
                     </figcaption>
-                </figure>
+                </figure> -->
 
-                <figure class="mix portfolio-item web">
+                <!-- <figure class="mix portfolio-item web">
                     <img class="img-responsive" src="{% static 'img/portfolio/portfolio-3.jpg' %}" alt="Portfolio Item">
                     <a href="{% static 'img/portfolio/portfolio-3.jpg' %}" title="Title Three" rel="portfolio" class="fancybox"><span class="plus"></span></a>
                     <figcaption class="mask">
@@ -381,8 +384,8 @@
                         <h3>Road</h3>
                         <span></span>
                     </figcaption>
-                </figure>
-
+                </figure> -->
+                
                 <!-- <figure class="mix portfolio-item app">
                     <img class="img-responsive" src="{% static 'img/portfolio/portfolio-4.jpg' %}" alt="Portfolio Item">
                     <a href="{% static 'img/portfolio/portfolio-4.jpg' %}" title="Title Five" rel="portfolio" class="fancybox"><span class="plus"></span></a>
@@ -634,10 +637,10 @@
                             <label  class="label">Category Of Complaint</label>
                             <!-- <input name="department" type="text" class="input"> -->
                             <select name="category" class="label">
-                                <option value="volvo">Garbage</option>
-                                <option value="saab">Sanitory</option>
-                                <option value="opel">Road</option>
-                                <option value="audi">Electricity</option>
+                                <option value="Garbage">Garbage</option>
+                                <option value="Sanitory">Sanitory</option>
+                                <option value="Road">Road</option>
+                                <option value="Electricity">Electricity</option>
                               </select>
                         </div>
                         <div class="group">
@@ -955,4 +958,3 @@
 
 
 </html>
-{% endblock %}

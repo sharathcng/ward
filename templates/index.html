@@ -331,9 +331,23 @@
                 </ul>
             </nav>
 
+            {% for complaint in complaints %}
             <div id="projects" class="clearfix">
+                <!-- {{complaint.id}}
+                {{complaint.img}}
+                {{complaint.title}} -->       
 
                 <figure class="mix portfolio-item app">
+                    <img class="img-responsive" src="{{ complaint.img.url }}" alt="Portfolio Item">
+                    <a href="{{ complaint.img.url }}}" title="Title One" rel="portfolio" class="fancybox"><span class="plus"></span></a>
+                    <figcaption class="mask">
+                        <h3>{{complaint.title}}{{complaint.user_id}}</h3>
+                        <span></span>
+                    </figcaption>
+                </figure>
+            {% endfor %}
+
+                <!-- <figure class="mix portfolio-item app">
                     <img class="img-responsive" src="{% static 'img/portfolio/portfolio-1.jpg' %}" alt="Portfolio Item">
                     <a href="{% static 'img/portfolio/portfolio-1.jpg' %}" title="Title One" rel="portfolio" class="fancybox"><span class="plus"></span></a>
                     <figcaption class="mask">
@@ -367,7 +381,7 @@
                         <h3>Road</h3>
                         <span></span>
                     </figcaption>
-                </figure>
+                </figure> -->
 
                 <!-- <figure class="mix portfolio-item app">
                     <img class="img-responsive" src="{% static 'img/portfolio/portfolio-4.jpg' %}" alt="Portfolio Item">
