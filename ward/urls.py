@@ -19,6 +19,7 @@ from django.urls import path
 from django.conf.urls import url
 from django.conf.urls.static import static
 from user import views
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,4 +29,4 @@ urlpatterns = [
     path('user_page',views.user_page, name="user_page"),
     path('post_comp',views.post_comp, name="post_comp"),
 
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

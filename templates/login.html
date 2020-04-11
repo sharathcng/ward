@@ -168,22 +168,23 @@
             </div>
         <section id="service-bottom">
             <div class="container">
-                
+                {% block userblock %}
                     <div class="mobile-device">
-                        
-                        <img data-wow-delay="0.2s" class="img-responsive black  wow fadeInLeftBig" src="{% static 'img/icons/iphone-black.png' %}" alt="iPhone Black">  
-                        <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="{% static 'img/icons/iphone-white.png' %}" alt="iPhone White"> 
+                        <!-- <img src="{{ obje.profile_pic.url }}" /> -->
+                        <img data-wow-delay="0.3s" class="img-responsive black  wow fadeInLeftBig" src="{{ obje.profile_pic.url }}" alt="iPhone Black" style="width:400px;height:336px"> 
+                        <!-- <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="{% static 'img/icons/iphone-white.png' %}" alt="iPhone White">   -->
                     </div>
+                   
                 <div class="service-features wow fadeInRight">
                     <h3><u>My Profile</u></h3>
-                    {% block userblock %}
+                  
                     <ul>
                         <li>{{obje.name}}</li>
                         <li>{{obje.mobilenum}}</li>
                         <li>{{obje.email}}</li>
                         <li>{{obje.gender}}</li>
                     </ul>
-                    {% endblock %}
+                    
                 </div>
             </div>
             
@@ -954,3 +955,4 @@
 
 
 </html>
+{% endblock %}

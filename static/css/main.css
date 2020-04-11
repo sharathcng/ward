@@ -390,7 +390,7 @@ width: 11px;
 }
 
 .mobile-device .black {
-  left: 98px;
+  left: 78px;
   z-index: 2;
 }
 
@@ -403,10 +403,9 @@ width: 11px;
   background-color: #0f748f;
   color: #fff;
   height: 335px;
-  padding: 50px 0 50px 65px;
+  padding: 10px 0 50px 65px;
   position: absolute;
   right: 0;
-  top: 18%;
   width: 45%;
 }
 
