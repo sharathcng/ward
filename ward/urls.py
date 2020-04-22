@@ -28,5 +28,10 @@ urlpatterns = [
     path('register',views.register, name="register"),
     path('user_page',views.user_page, name="user_page"),
     path('post_comp',views.post_comp, name="post_comp"),
+    path('comp',views.comp,name="comp"),
+    path('admin',views.admin,name="admin"),
+    path('notification',views.notification,name="notification"),
+    path('notify',views.notify,name="notify"),
+    path('forComp',views.forComp,name="forComp"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

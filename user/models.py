@@ -18,4 +18,10 @@ class Post_Complaint(models.Model):
     img=models.FileField()
     description=models.CharField(max_length=800)
     location=models.CharField(max_length=500)
-    date=models.DateTimeField(auto_now_add=True)
+    date=models.DateTimeField(auto_now=True, auto_now_add=False)
+
+class Notification(models.Model):
+    N_title = models.CharField(max_length=200)
+    N_img = models.FileField(null=True,blank=True)
+    N_description = models.CharField(max_length=800)
+    N_date = models.DateTimeField(auto_now=True, auto_now_add=False)
