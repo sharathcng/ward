@@ -7,6 +7,7 @@ from user.forms import NotificationForms
 from user.models import RegisterModel
 from user.models import Post_Complaint
 from user.models import Notification
+from math import ceil
 
 
 # Create your views here.
@@ -33,7 +34,9 @@ def index(request):
             request.session['userid'] = check.id
             us_id = RegisterModel.objects.get(id=check.id)
             complaints = Post_Complaint.objects.all()
-            context = {"complaints":complaints,"obje":us_id}
+            n = len(complaints)
+            nSlides = n//4 + ceil((n/4)-(n//4))
+            context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
             return render(request,'admin.html',context)
         try:
             check = RegisterModel.objects.get(userid=usid, password=pswd)
@@ -45,7 +48,9 @@ def index(request):
         except:
             pass
     complaints = Post_Complaint.objects.all()
-    context = {"complaints":complaints}
+    n = len(complaints)
+    nSlides = n//4 + ceil((n/4)-(n//4))
+    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints}
     return render(request, 'index.html',context)
 
 
@@ -59,8 +64,21 @@ def comp(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
     complaints = Post_Complaint.objects.all()
-    context = {"complaints":complaints,"obje":us_id}
+    n = len(complaints)
+    nSlides = n//4 + ceil((n/4)-(n//4))
+    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
     return render(request, 'comp.html', context)
+
+
+# def comp(request):
+#     products = Product.objects.all()
+#     print(products)
+#     n = len(products)
+#     nSlides = n//4 + ceil((n/4)-(n//4))
+#     params = {'no_of_slides':nSlides, 'range': range(1,nSlides),'product': products}
+#     return render(request, 'shop/index.html', params)
+
+
 
 def admin(request):
     usid = request.session['userid']
