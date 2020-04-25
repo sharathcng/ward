@@ -65,11 +65,25 @@ def user_page(request):
 def comp(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
-    complaints = Post_Complaint.objects.all()
-    n = len(complaints)
-    nSlides = n//4 + ceil((n/4)-(n//4))
-    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
-    return render(request, 'comp.html', context)
+
+    allProds = []
+    catprods = Post_Complaint.objects.values('category', 'id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prod = Post_Complaint.objects.filter(category=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds':allProds,"obje":us_id}
+    return render(request, 'comp.html', params)
+
+
+
+    # complaints = Post_Complaint.objects.all()
+    # n = len(complaints)
+    # nSlides = n//4 + ceil((n/4)-(n//4))
+    # context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
+    # return render(request, 'comp.html', context)
 
 
 # def comp(request):
@@ -99,11 +113,17 @@ def notification(request):
 def forComp(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
-    complaints = ForwardedModel.objects.all()
-    n = len(complaints)
-    nSlides = n//4 + ceil((n/4)-(n//4))
-    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
-    return render(request, 'forComplaints.html', context)
+    allProds = []
+    catprods = ForwardedModel.objects.values('category2', 'id')
+    cats = {item['category2'] for item in catprods}
+    for cat in cats:
+        prod = ForwardedModel.objects.filter(category2=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds':allProds,"obje":us_id}
+    return render(request, 'forComplaints.html', params)
+    
 
 
 
