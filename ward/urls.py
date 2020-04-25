@@ -22,7 +22,7 @@ from user import views
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # path('admin/', admin.site.urls),
 
     path('',views.index, name='index'),
     path('register',views.register, name="register"),
@@ -33,5 +33,6 @@ urlpatterns = [
     path('notification',views.notification,name="notification"),
     path('notify',views.notify,name="notify"),
     path('forComp',views.forComp,name="forComp"),
+    path('send_email/(?P<pk>\d+)/$',views.send_email, name="send_email"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

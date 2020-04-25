@@ -25,3 +25,13 @@ class Notification(models.Model):
     N_img = models.FileField(null=True,blank=True)
     N_description = models.CharField(max_length=800)
     N_date = models.DateTimeField(auto_now=True, auto_now_add=False)
+
+
+class ForwardedModel(models.Model):
+    userd = models.BigIntegerField(max_length=50)
+    category2=models.CharField(max_length=2000)
+    title2=models.CharField(max_length=200)
+    img2=models.FileField()
+    description2=models.CharField(max_length=800)
+    location2=models.CharField(max_length=500)
+    date2=models.DateTimeField(auto_now=True, auto_now_add=False)

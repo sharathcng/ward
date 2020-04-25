@@ -7,6 +7,8 @@ from user.forms import NotificationForms
 from user.models import RegisterModel
 from user.models import Post_Complaint
 from user.models import Notification
+from user.models import ForwardedModel
+from django.core.mail import send_mail
 from math import ceil
 
 
@@ -97,8 +99,10 @@ def notification(request):
 def forComp(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
-    complaints = Post_Complaint.objects.all()
-    context = {"complaints":complaints,"obje":us_id}
+    complaints = ForwardedModel.objects.all()
+    n = len(complaints)
+    nSlides = n//4 + ceil((n/4)-(n//4))
+    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
     return render(request, 'forComplaints.html', context)
 
 
@@ -132,3 +136,29 @@ def notify(request):
     else:
         forms = ComplaintForms()
     return render(request, 'notification.html', {'form': forms})
+
+
+def send_email(request,pk):
+    pr = Post_Complaint.objects.get(id=pk)
+    cid = pr.id
+    c = pr.category
+    t = pr.title
+    d = pr.description
+    l = pr.location
+    i = pr.img  
+    content = c+"\n"+t+"\n"+d+"\n"+l
+    mail = smtplib.SMTP('smtp.gmail.com', 587)
+    mail.ehlo()
+    mail.starttls()
+    mail.login('cngsharath@gmail.com', '9480473080')
+    if c == "Garbage" :
+        mail.sendmail( 'cngsharath@gmail.com', 'sachin.s.kabadi10@gmail.com',content)
+    elif c == "Sanitory":
+        mail.sendmail( 'cngsharath@gmail.com','sknamrathagowda@gmail.com', content)
+    elif c == "Electricity":
+        mail.sendmail( 'cngsharath@gmail.com','www.namrathaskgowda@gmail.com', content)
+    else:
+        mail.sendmail('cngsharath@gmail.com', 'cngsharath@gmail.com', content)
+    mail.close()
+    ForwardedModel.objects.create(userd=cid,category2=c,title2=t,img2=i,description2=d,location2=l)
+    return redirect('admin')

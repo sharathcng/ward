@@ -241,7 +241,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{complaints.0.title}}</h5>
                 <p class="card-text">{{complaints.0.description}}</p>
-                <a href="#" class="btn btn-primary">Forward</a>
+                <a href="{% url 'send_email' complaints.0.id %}" class="btn btn-primary">Forward</a>
             </div>
           </div>
        </div>
@@ -254,7 +254,7 @@
             <div class="card-body">
               <h5 class="card-title">{{i.title}}</h5>
               <p class="card-text">{{i.description}}</p>
-              <a href="#" class="btn btn-primary">Forward</a>
+              <a href="{% url 'send_email' i.id %}" class="btn btn-primary">Forward</a>
             </div>
           </div>
         </div>
