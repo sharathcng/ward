@@ -6,7 +6,7 @@
   <!-- Required meta tags --> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Regal Admin</title>
+  <title>Admin Page</title>
   <!-- base:css -->
   <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
@@ -168,6 +168,21 @@
               <span class="menu-title">Forwarded Complaints</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'resolved_complaints' %}">
+              <i class="icon-book menu-icon"></i>
+              <span class="menu-title">Resolved Complaints</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'rejected_complaints' %}">
+              <i class="icon-book menu-icon"></i>
+              <span class="menu-title">Rejected Complaints</span>
+            </a>
+          </li>
+
           <li class="nav-item">
             <a class="nav-link" href="{% url 'notification' %}">
               <i class="icon-command menu-icon"></i>
@@ -218,7 +233,25 @@
       </nav>
       <!-- partial -->
       <div class="main-panel">
-         <div class="content-wrapper">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Line chart</h4>
+                  <canvas id="lineChart"></canvas>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Bar chart</h4>
+                  <canvas id="barChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
               

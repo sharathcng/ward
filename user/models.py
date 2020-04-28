@@ -35,3 +35,14 @@ class ForwardedModel(models.Model):
     description2=models.CharField(max_length=800)
     location2=models.CharField(max_length=500)
     date2=models.DateTimeField(auto_now=True, auto_now_add=False)
+    status = models.CharField(max_length=20,null=True,blank=True)
+
+class CompletedModel(models.Model):
+    comp_id = models.BigIntegerField(max_length=50)
+    category = models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    img = models.FileField()
+    description = models.CharField(max_length=800)
+    location = models.CharField(max_length=500)
+    date = models.DateTimeField(auto_now=True, auto_now_add=False)
+    status = models.CharField(max_length=20,null=True,blank=True)

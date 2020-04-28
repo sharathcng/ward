@@ -388,9 +388,9 @@
                 <div class="card" style="width: 18rem;">
                   <img src='{{ complaints.0.img.url }}' class="card-img-top" alt="...">
                   <div class="card-body">
-                      <h5 class="card-title">{{complaints.0.title}}</h5>
-                      <p class="card-text">{{complaints.0.description}}</p>
-                      <a href="#" class="btn btn-primary">Forward</a>
+                    <p class="card-text">Title : {{complaints.0.title}}</p>
+                      <p class="card-text">Posted by :{{complaints.0.user_id.name}}</p>
+                      <!-- <a href="#" class="btn btn-primary">Forward</a> -->
                   </div>
                 </div>
              </div>
@@ -401,9 +401,9 @@
                 <div class="card" style="width: 18rem;">
                   <img src='{{ i.img.url }}' class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h5 class="card-title">{{i.title}}</h5>
-                    <p class="card-text">{{i.description}}</p>
-                    <a href="#" class="btn btn-primary">Forward</a>
+                    <p class="card-text">Title : {{i.title}}</p>
+                    <p class="card-text">Posted by :{{i.user_id.name}}</p>
+                    <!-- <a href="#" class="btn btn-primary">Forward</a> -->
                   </div>
                 </div>
               </div>

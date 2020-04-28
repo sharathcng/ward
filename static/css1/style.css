@@ -21586,7 +21586,7 @@ dl li {
 /* Sidebar */
 .sidebar {
   min-height: calc(100vh - 60px);
-  background: #ec37fc;
+  background: dodgerblue;
   font-family: "Karla", sans-serif;
   font-weight: normal;
   padding: 0;
@@ -21878,7 +21878,7 @@ dl li {
 }
 
 .navbar .navbar-brand-wrapper {
-  background: #ec37fc;
+  background: dodgerblue;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
@@ -21888,7 +21888,7 @@ dl li {
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand {
-  color: #27367f;
+  color: dodgerblue;
   font-size: 1.5rem;
   margin-right: 0;
   padding: .25rem 0;

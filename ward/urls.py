@@ -29,10 +29,16 @@ urlpatterns = [
     path('user_page',views.user_page, name="user_page"),
     path('post_comp',views.post_comp, name="post_comp"),
     path('comp',views.comp,name="comp"),
+    path('all_comp',views.all_comp,name="all_comp"),
     path('admin',views.admin,name="admin"),
     path('notification',views.notification,name="notification"),
     path('notify',views.notify,name="notify"),
     path('forComp',views.forComp,name="forComp"),
+    path('resolved_complaints',views.resolved_complaints,name="resolved_complaints"),
+    path('rejected_complaints',views.rejected_complaints,name="rejected_complaints"),
+    
     path('send_email/(?P<pk>\d+)/$',views.send_email, name="send_email"),
+    path('solution/(?P<pk>\d+)/$',views.solution,name="solution"),
+    path('<int:pk><int:x>/',views.complaint_status_update, name="complaint_status_update"),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

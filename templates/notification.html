@@ -6,7 +6,7 @@
   <!-- Required meta tags --> 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Regal Admin</title>
+  <title>Admin Page</title>
   <!-- base:css -->
   <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
@@ -101,11 +101,11 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
               <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-              <a class="dropdown-item preview-item">               
+              <!-- <a class="dropdown-item preview-item">               
                   <i class="icon-head"></i> Profile
-              </a>
-              <a class="dropdown-item preview-item">
-                  <i class="icon-inbox"></i> Logout
+              </a> -->
+              <a class="dropdown-item preview-item" href="/">
+                <i class="icon-heart"></i> Logout
               </a>
             </div>
           </li>
@@ -168,6 +168,21 @@
               <span class="menu-title">Forwarded Complaints</span>
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'resolved_complaints' %}">
+              <i class="icon-book menu-icon"></i>
+              <span class="menu-title">Resolved Complaints</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'rejected_complaints' %}">
+              <i class="icon-book menu-icon"></i>
+              <span class="menu-title">Rejected Complaints</span>
+            </a>
+          </li>
+ 
           <li class="nav-item">
             <a class="nav-link" href="{% url 'notification' %}">
               <i class="icon-command menu-icon"></i>
@@ -185,7 +200,7 @@
               <div class="col-md-6 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Notification post form</h4>
+                    <h1><u><b>Notification for the WARD people </b></u></h1>
                     <p class="card-description">
                       <!-- Basic form layout -->
                     </p>
@@ -204,7 +219,7 @@
                         <label for="exampleInputPassword1">Description</label>
                         <input type="text" name="N_description" class="form-control" >
                       </div>
-                      <button type="submit" class="btn btn-primary mr-2" name="submit" value="SUBMIT">Submit</button>
+                      <button type="submit" class="btn btn-primary mr-2" name="submit" value="SUBMIT">Send</button>
                       <button class="btn btn-light">Cancel</button>
                     </form>
                   </div>

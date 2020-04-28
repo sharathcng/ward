@@ -8,8 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Admin Page</title>
   <!-- base:css -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
   <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/base/vendor.bundle.base.css' %}">
@@ -30,8 +28,8 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a class="" href="index.html"><img src="{% static 'img/Logo1.png' %}" alt="logo" style="width: 85pt;height: 75pt;"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'images1/logo-mini.svg' %}" alt="logo"/></a>
+        <a class="" href="{% url 'admin' %}"><img src="{% static 'img/Logo1.png' %}" alt="logo" style="width: 85pt;height: 75pt;"/></a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'admin' %}"><img src="{% static 'images1/logo-mini.svg' %}" alt="logo"/></a>
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -53,50 +51,7 @@
             <!-- <li class="nav-item dropdown d-lg-flex d-none">
                 <button type="button" class="btn btn-info font-weight-bold">+ Create New</button>
             </li> -->
-          <li class="nav-item dropdown d-flex">
-            <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="icon-air-play mx-0"></i>
-            </a> -->
-            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
-              <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                    <img src="{% static 'images1/faces/face4.jpg' %}" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-normal">David Grey
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    The meeting is cancelled
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                    <img src="{% static 'images1/faces/face2.jpg' %}" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-normal">Tim Cook
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    New product launch
-                  </p>
-                </div>
-              </a>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                    <img src="{% static 'images1/faces/face3.jpg' %}" alt="image" class="profile-pic">
-                </div>
-                <div class="preview-item-content flex-grow">
-                  <h6 class="preview-subject ellipsis font-weight-normal"> Johnson
-                  </h6>
-                  <p class="font-weight-light small-text text-muted mb-0">
-                    Upcoming board meeting
-                  </p>
-                </div>
-              </a>
-            </div>
-          </li>
+          
           <li class="nav-item dropdown d-flex mr-4 ">
             <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="icon-cog"></i>
@@ -164,7 +119,6 @@
               </ul>
             </div> 
           </li>-->
-          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'forComp' %}">
               <i class="icon-help menu-icon"></i>
@@ -192,12 +146,11 @@
               <span class="menu-title">Notifications</span>
             </a>
           </li>
-          
-            
         </ul>
       </nav>
       <!-- partial -->
       <div class="main-panel">
+        
         <style type="text/css">
           .col-md-3
           {
@@ -258,7 +211,7 @@
 {% load static %}
 <div class="container">
   
-    <h1><b><u>Pending Complaints</u></b></h1>
+  <h1><b><u>Rejected Complaints</u></b></h1>
 <div id="demo" class="carousel slide my-3" data-ride="carousel">
     <ul class="carousel-indicators">
       <li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -283,35 +236,36 @@
 
 
     <div class="container carousel-inner no-padding">
-
       <div class="carousel-item active">
+        {% if product.0.status == "Rejected" %}
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
-            <img src='{{ product.0.img.url }}' class="card-img-top" alt="...">
+            <img src='{{ product.0.img }}' class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Title : {{product.0.title}}</h5>
-                <h5 class="card-title">Posted by : {{product.0.user_id.name}}</h5>
-                <h5 class="card-title">Description : </h5>
-                <p class="card-text">{{product.0.description}}</p>
-                <a href="{% url 'send_email' product.0.id %}" class="btn btn-primary">Forward</a>
+                <!-- <h5 class="card-title">Posted by : {{product.0.user_id.name}}</h5> -->
+                <h5 class="card-title" class="card-text">Status : {{product.0.status}}</h5>
+                
             </div>
           </div>
        </div>
+        {% endif %}
 
 
         {% for i in product|slice:"1:"%}
+            {% if i.status == "Rejected" %}
         <div class="col-xs-3 col-sm-3 col-md-3">
           <div class="card" style="width: 18rem;">
-            <img src='{{ i.img.url }}' class="card-img-top" alt="...">
+            <img src='{{ i.img }}' class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">Title : {{i.title}}</h5>
-              <h5 class="card-title">Posted by : {{i.user_id.name}}</h5>
-              <h5 class="card-title">Description : </h5>
-              <p class="card-text">{{i.description}}</p>
-              <a href="{% url 'send_email' i.id %}" class="btn btn-primary">Forward</a>
+              <!-- <h5 class="card-title">Posted by : {{i.user_id.name}}</h5> -->
+              <h5 class="card-title">Status : {{i.status}}</h5>
+              
             </div>
           </div>
         </div>
+            {% endif %}
         {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
       </div><div class="carousel-item">
         {% endif %}
@@ -332,7 +286,6 @@
     </a>
     {% endfor %}
 </div>
- 
 
 
 
@@ -348,35 +301,9 @@
 
 
 
-        <!-- <div class="content-wrapper">
-            <nav class="project-filter clearfix text-center wow fadeInLeft"  data-wow-delay="0.5s">
-                <ul class="list-inline">
-                    <li><a href="javascript:;" class="filter" data-filter="all">All</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".app">Garbage</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".photography">Sanitary</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".web">Electritcity</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".print">Road</a></li>
-                </ul>
-            </nav>
-
-            {% for complaint in complaints %}
-            <div id="projects" class="clearfix">
-                 {{complaint.id}}
-                {{complaint.img}}
-                {{complaint.title}}      
-
-                <figure class="mix portfolio-item app">
-                    <img class="img-responsive" src="{{ complaint.img.url }}" alt="Portfolio Item">
-                    <a href="{{ complaint.img.url }}" title="{{complaint.description}}" rel="portfolio" class="fancybox" ><span class="plus"></span></a>
-                    <figcaption class="mask">
-                        <h3>{{complaint.title}}</h3>
-                        <span></span>
-                    </figcaption>
-                </figure>
-            {% endfor %}
 
 
-        </div> -->
+
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

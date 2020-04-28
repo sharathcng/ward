@@ -1,3 +1,4 @@
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -8,8 +9,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Admin Page</title>
   <!-- base:css -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-
   <link rel="stylesheet" href="{% static 'vendors/mdi/css/materialdesignicons.min.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}">
   <link rel="stylesheet" href="{% static 'vendors/base/vendor.bundle.base.css' %}">
@@ -144,7 +143,7 @@
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
-          {% endblock %}
+          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'comp' %}">
               <i class="icon-file menu-icon"></i>
@@ -164,28 +163,12 @@
               </ul>
             </div> 
           </li>-->
-          
           <li class="nav-item">
             <a class="nav-link" href="{% url 'forComp' %}">
               <i class="icon-help menu-icon"></i>
               <span class="menu-title">Forwarded Complaints</span>
             </a>
           </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'resolved_complaints' %}">
-              <i class="icon-book menu-icon"></i>
-              <span class="menu-title">Resolved Complaints</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'rejected_complaints' %}">
-              <i class="icon-book menu-icon"></i>
-              <span class="menu-title">Rejected Complaints</span>
-            </a>
-          </li>
-
           <li class="nav-item">
             <a class="nav-link" href="{% url 'notification' %}">
               <i class="icon-command menu-icon"></i>
@@ -193,146 +176,20 @@
             </a>
           </li>
           
-            
         </ul>
       </nav>
       <!-- partial -->
       <div class="main-panel">
-        <style type="text/css">
-          .col-md-3
-          {
-          display: inline-block;
-          margin-left:-5px;
-          }
-
-          .carousel-indicators .active {
-          background-color: blue;
-            }
-
-          .col-md-3 img{
-
-          width: 227px;
-          max-height: 242px;
-          }
-
-          body .carousel-indicator li{
-          background-color: blue;
-          }
-
-          body .carousel-indicators{
-          bottom: 0;
-          }
-
-          body .carousel-control-prev-icon,
-          body .carousel-control-next-icon{
-          background-color: rgb(230, 31, 187);;
-          }
-
-          .carousel-control-prev,
-          .carousel-control-next{
-            position: absolute;
-            top: auto;
-            bottom: auto;
-            z-index: 1;
-            display: flow-root;
-            align-items: center;
-            justify-content: center;
-            width: 15%;
-            color: rgb(230, 31, 187);
-            text-align: center;
-            opacity: 0.5;
-            transition: opacity 0.15s ease;
-            
-          
-          }
-          .carousel-control-prev{
-            margin-left: -160px;
-          }
-
-           body .no-padding{
-           padding-left: 0;
-           
-           }
-          </style>
-
-{% load static %}
-<div class="container">
-  
-    <h1><b><u>Pending Complaints</u></b></h1>
-<div id="demo" class="carousel slide my-3" data-ride="carousel">
-    <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
-
-       {% for i in range %}
-      <li data-target="#demo" data-slide-to="{{i}}" ></li>
-      {% endfor %}
-    </ul>
-
-    <!--Slideshow starts here -->
-    {% for product, range, nSlides in allProds %}
-    <h3 class="my-4"><u>Complaints regarding {{product.0.category}}</u></h3>
-<div id="demo{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
-    <ul class="carousel-indicators">
-      <li data-target="#demo{{forloop.counter}}" data-slide-to="0" class="active"></li>
-
-       {% for i in range %}
-      <li data-target="#demo{{forloop.parentloop.counter}}" data-slide-to="{{i}}" ></li>
-      {% endfor %}
-    </ul>
-
-
-
-    <div class="container carousel-inner no-padding">
-
-      <div class="carousel-item active">
-        <div class="col-xs-3 col-sm-3 col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img src='{{ product.0.img.url }}' class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Title : {{product.0.title}}</h5>
-                <h5 class="card-title">Posted by : {{product.0.user_id.name}}</h5>
-                <h5 class="card-title">Description : </h5>
-                <p class="card-text">{{product.0.description}}</p>
-                <a href="{% url 'send_email' product.0.id %}" class="btn btn-primary">Forward</a>
-            </div>
-          </div>
-       </div>
-
-
-        {% for i in product|slice:"1:"%}
-        <div class="col-xs-3 col-sm-3 col-md-3">
-          <div class="card" style="width: 18rem;">
-            <img src='{{ i.img.url }}' class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Title : {{i.title}}</h5>
-              <h5 class="card-title">Posted by : {{i.user_id.name}}</h5>
-              <h5 class="card-title">Description : </h5>
-              <p class="card-text">{{i.description}}</p>
-              <a href="{% url 'send_email' i.id %}" class="btn btn-primary">Forward</a>
-            </div>
-          </div>
-        </div>
-        {% if forloop.counter|divisibleby:3 and forloop.counter > 0 and not forloop.last %}
-      </div><div class="carousel-item">
-        {% endif %}
-
-        {% endfor %}
-    </div>
-
-
-
-</div>
-</div>
-    <!-- left and right controls for the slide -->
-    <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
-    {% endfor %}
-</div>
- 
+        
+        <div class="content-wrapper">
+            <div class="row">
+              <!-- <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Complaint solution form</h4>
+                    <p class="card-description">
+                       Basic form layout 
+                    </p> -->
 
 
 
@@ -348,35 +205,56 @@
 
 
 
-        <!-- <div class="content-wrapper">
-            <nav class="project-filter clearfix text-center wow fadeInLeft"  data-wow-delay="0.5s">
-                <ul class="list-inline">
-                    <li><a href="javascript:;" class="filter" data-filter="all">All</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".app">Garbage</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".photography">Sanitary</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".web">Electritcity</a></li>
-                    <li><a href="javascript:;" class="filter" data-filter=".print">Road</a></li>
-                </ul>
-            </nav>
-
-            {% for complaint in complaints %}
-            <div id="projects" class="clearfix">
-                 {{complaint.id}}
-                {{complaint.img}}
-                {{complaint.title}}      
-
-                <figure class="mix portfolio-item app">
-                    <img class="img-responsive" src="{{ complaint.img.url }}" alt="Portfolio Item">
-                    <a href="{{ complaint.img.url }}" title="{{complaint.description}}" rel="portfolio" class="fancybox" ><span class="plus"></span></a>
-                    <figcaption class="mask">
-                        <h3>{{complaint.title}}</h3>
-                        <span></span>
-                    </figcaption>
-                </figure>
-            {% endfor %}
 
 
-        </div> -->
+
+
+
+
+
+
+              <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Complaint Details</h4>
+                    <p class="card-description">
+                    <div class="container carousel-inner no-padding">
+                        <div class="carousel-item active">
+                            <div class="col-xs-3 col-sm-3 col-md-3">
+                                <div class="card" style="width: 18rem;">
+                                    <img src='{{cont.image}}' class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Title : {{cont.title}}</h5>
+                                            <h3 class="card-title">Category : {{cont.category}}</h3>
+                                            <h3 class="card-title">Location : {{cont.location}}</h3>
+                                            <h3 class="card-title">Status : {{cont.status}}</h3>
+                                            <!-- <h3 class="card-title">{{cont.title}}</h3> -->
+                                            <p class="card-text"><h3 class="card-title">Description :</h3>{{cont.desc}}</p>
+                                                
+                                        </div>
+                                        
+                                </div>
+                                
+                            </div>
+                            
+                        </div>
+                     </div>
+                     <br>
+                     <a href="{% url 'complaint_status_update' pk=cont.id x=0 %}">
+                     <button type="button" class="btn btn-primary btn-icon-text" >
+                      <i class="mdi mdi-file-check btn-icon-prepend"></i>
+                      Resolved
+                    </button></a>
+                    <a href="{% url 'complaint_status_update' pk=cont.id x=1 %}">
+                    <button type="button" class="btn btn-success btn-icon-text" >
+                     <i class="mdi mdi-alert btn-icon-prepend"></i>                                                    
+                     Rejected
+                   </button></a>
+                </div>
+                </div>
+                </div>
+                </div>
+          {% endblock %}
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">

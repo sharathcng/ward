@@ -9,6 +9,7 @@ from user.models import Post_Complaint
 from user.models import Notification
 from user.models import ForwardedModel
 from django.core.mail import send_mail
+from user.models import CompletedModel
 from math import ceil
 
 
@@ -56,6 +57,21 @@ def index(request):
     return render(request, 'index.html',context)
 
 
+def all_comp(request):
+    allProds = []
+    catprods = Post_Complaint.objects.values('category', 'id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prod = Post_Complaint.objects.filter(category=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds':allProds}
+    return render(request, 'all_complaints.html', params)
+    
+
+
+
 
 def user_page(request):
     usid = request.session['userid']
@@ -79,21 +95,49 @@ def comp(request):
 
 
 
-    # complaints = Post_Complaint.objects.all()
-    # n = len(complaints)
-    # nSlides = n//4 + ceil((n/4)-(n//4))
-    # context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
-    # return render(request, 'comp.html', context)
+def forComp(request):
+    usid = request.session['userid']
+    us_id = RegisterModel.objects.get(id=usid)
+    allProds = []
+    catprods = ForwardedModel.objects.values('category2', 'id')
+    cats = {item['category2'] for item in catprods}
+    for cat in cats:
+        prod = ForwardedModel.objects.filter(category2=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds':allProds,"obje":us_id}
+    return render(request, 'forComplaints.html', params)
+
+def resolved_complaints(request):
+    usid = request.session['userid']
+    us_id = RegisterModel.objects.get(id=usid)
+    allProds = []
+    catprods = CompletedModel.objects.values('category', 'id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prod = CompletedModel.objects.filter(category=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds':allProds,"obje":us_id}
+    return render(request, 'Resolved_complaints.html', params)
 
 
-# def comp(request):
-#     products = Product.objects.all()
-#     print(products)
-#     n = len(products)
-#     nSlides = n//4 + ceil((n/4)-(n//4))
-#     params = {'no_of_slides':nSlides, 'range': range(1,nSlides),'product': products}
-#     return render(request, 'shop/index.html', params)
 
+def rejected_complaints(request):
+    usid = request.session['userid']
+    us_id = RegisterModel.objects.get(id=usid)
+    allProds = []
+    catprods = CompletedModel.objects.values('category', 'id')
+    cats = {item['category'] for item in catprods}
+    for cat in cats:
+        prod = CompletedModel.objects.filter(category=cat)
+        n = len(prod)
+        nSlides = n // 4 + ceil((n / 4) - (n // 4))
+        allProds.append([prod, range(1, nSlides), nSlides])
+    params = {'allProds':allProds,"obje":us_id}
+    return render(request, 'Rejected_complaints.html', params)
 
 
 def admin(request):
@@ -110,21 +154,7 @@ def notification(request):
     context = {"complaints":complaints,"obje":us_id}
     return render(request, 'notification.html', context)
 
-def forComp(request):
-    usid = request.session['userid']
-    us_id = RegisterModel.objects.get(id=usid)
-    allProds = []
-    catprods = ForwardedModel.objects.values('category2', 'id')
-    cats = {item['category2'] for item in catprods}
-    for cat in cats:
-        prod = ForwardedModel.objects.filter(category2=cat)
-        n = len(prod)
-        nSlides = n // 4 + ceil((n / 4) - (n // 4))
-        allProds.append([prod, range(1, nSlides), nSlides])
-    params = {'allProds':allProds,"obje":us_id}
-    return render(request, 'forComplaints.html', params)
     
-
 
 
 def post_comp(request):
@@ -160,7 +190,6 @@ def notify(request):
 
 def send_email(request,pk):
     pr = Post_Complaint.objects.get(id=pk)
-    cid = pr.id
     c = pr.category
     t = pr.title
     d = pr.description
@@ -171,7 +200,7 @@ def send_email(request,pk):
     mail.ehlo()
     mail.starttls()
     mail.login('cngsharath@gmail.com', '9480473080')
-    if c == "Garbage" :
+    if c == "Garbage":
         mail.sendmail( 'cngsharath@gmail.com', 'sachin.s.kabadi10@gmail.com',content)
     elif c == "Sanitory":
         mail.sendmail( 'cngsharath@gmail.com','sknamrathagowda@gmail.com', content)
@@ -180,5 +209,39 @@ def send_email(request,pk):
     else:
         mail.sendmail('cngsharath@gmail.com', 'cngsharath@gmail.com', content)
     mail.close()
-    ForwardedModel.objects.create(userd=cid,category2=c,title2=t,img2=i,description2=d,location2=l)
+    ForwardedModel.objects.create(userd=pk,category2=c,title2=t,img2=i,description2=d,location2=l)
+    Post_Complaint.objects.filter(id=pk).delete()
     return redirect('admin')
+
+
+
+def solution(request,pk):
+    pr = ForwardedModel.objects.get(id=pk)
+    cid = pr.id
+    ca = pr.category2
+    t = pr.title2
+    d = pr.description2
+    l = pr.location2
+    i = pr.img2.url
+    s = pr.status
+    context = {'title':t,'desc':d,'id':cid,'category':ca,'image':i,'location':l,'status':s}
+    return render(request, 'solution.html',{"cont":context})
+
+def complaint_status_update(request,pk,x):
+    pr = ForwardedModel.objects.get(id=pk)
+    c = pr.category2
+    t = pr.title2
+    d = pr.description2
+    l = pr.location2
+    i = pr.img2.url
+    if x == 0:
+        ForwardedModel.objects.filter(id=pk).update(status="Resolved")
+        CompletedModel.objects.create(comp_id=pk,category=c,title=t,img=i,description=d,location=l,status="Resolved")
+        ForwardedModel.objects.filter(id=pk).delete()
+    elif x == 1:
+        ForwardedModel.objects.filter(id=pk).update(status="Not Resolved")
+        CompletedModel.objects.create(comp_id=pk,category=c,title=t,img=i,description=d,location=l,status="Rejected")
+        ForwardedModel.objects.filter(id=pk).delete()
+    return redirect('admin')
+
+

@@ -3,7 +3,6 @@ from django import forms
 from user.models import RegisterModel
 from user.models import Post_Complaint
 from user.models import Notification
-
 class RegisterForms(forms.ModelForm):
     class Meta:
         model=RegisterModel
@@ -18,3 +17,4 @@ class NotificationForms(forms.ModelForm):
     class Meta:
         model=Notification
         fields=("N_title","N_img","N_description")
+

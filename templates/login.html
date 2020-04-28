@@ -335,7 +335,7 @@
             </section>
 
 
-            <nav class="project-filter clearfix text-center wow fadeInLeft"  data-wow-delay="0.5s">
+            <!-- <nav class="project-filter clearfix text-center wow fadeInLeft"  data-wow-delay="0.5s">
                 <ul class="list-inline">
                     <li><a href="javascript:;" class="filter" data-filter="all">All</a></li>
                     <li><a href="javascript:;" class="filter" data-filter=".app">Garbage</a></li>
@@ -343,7 +343,7 @@
                     <li><a href="javascript:;" class="filter" data-filter=".web">Electritcity</a></li>
                     <li><a href="javascript:;" class="filter" data-filter=".print">Road</a></li>
                 </ul>
-            </nav>
+            </nav> -->
             
             <style type="text/css">
                 .col-md-3
@@ -401,9 +401,9 @@
                 <div class="card" style="width: 18rem;">
                   <img src='{{ complaints.0.img.url }}' class="card-img-top" alt="...">
                   <div class="card-body">
-                      <h5 class="card-title">{{complaints.0.title}}</h5>
-                      <p class="card-text">{{complaints.0.description}}</p>
-                      <a href="#" class="btn btn-primary">Forward</a>
+                    <p class="card-text">Title : {{complaints.0.title}}</p>
+                    <p class="card-text">Posted by :{{complaints.0.user_id.name}}</p>
+                      <!-- <a href="#" class="btn btn-primary">Forward</a> -->
                   </div>
                 </div>
              </div>
@@ -414,9 +414,9 @@
                 <div class="card" style="width: 18rem;">
                   <img src='{{ i.img.url }}' class="card-img-top" alt="...">
                   <div class="card-body">
-                    <h5 class="card-title">{{i.title}}</h5>
-                    <p class="card-text">{{i.description}}</p>
-                    <a href="#" class="btn btn-primary">Forward</a>
+                    <p class="card-text">Title : {{i.title}}</p>
+                    <p class="card-text">Posted by :{{i.user_id.name}}</p>
+                    <!-- <a href="#" class="btn btn-primary">Forward</a> -->
                   </div>
                 </div>
               </div>
@@ -432,13 +432,13 @@
       </div>
       </div>
           <!-- left and right controls for the slide -->
-          <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <a class="carousel-control-prev" href="#demo{{forloop.counter}}" data-slide="prev">
               <span class="carousel-control-prev-icon"></span>
           </a>
-          <a class="carousel-control-next" href="#demo" data-slide="next">
+          <a class="carousel-control-next" href="#demo{{forloop.counter}}" data-slide="next">
               <span class="carousel-control-next-icon"></span>
           </a>
-      
+          
       </div>
 
         </section>
@@ -728,7 +728,7 @@
                         </div>
                         <div class="group">
                             <label  class="label">Complaint Title</label>
-                            <input name="title" type="text" class="input">
+                            <input name="title" type="text" class="input" placeholder="Complaint Title">
                         </div>
                         <div class="group">
                             <label class="label">Complaint Image</label>
@@ -739,8 +739,8 @@
                             <textarea name="description"  class="input" placeholder="Write your complaint details here" ></textarea>
                         </div>
                         <div class="group">
-                            <label class="label">Complaint Location</label>
-                            <input name="location" type="text" class="input" >
+                            <label class="label">Complaint Address</label>
+                            <textarea name="location" type="text" class="input" placeholder="Enter complaint address"></textarea>
                         </div>
                         <!-- <div class="group">
                             <label class="label">Date</label>
