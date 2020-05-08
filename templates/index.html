@@ -263,7 +263,7 @@
 
         #Portfolio
         ========================== -->
-        
+      
         <section id="portfolio">
 
             <div class="section-title text-center wow fadeInDown">
@@ -281,27 +281,27 @@
                                     <div class="fact-icon">
                                         <i class="fa fa-check-square fa-lg"></i>
                                     </div>
-                                    <span data-to="120">0</span>
-                                    <p>Completed</p>
+                                    <span data-to="{{resolved}}">0</span>
+                                    <p>Resolved</p>
                                 </div>
                             </div>
                             
                             <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.8s">
                                 <div class="fact-item text-center">
                                     <div class="fact-icon">
-                                        <i class="fa fa-users fa-lg"></i>                                    
+                                        <i class="fa fa-warning fa-lg"></i>                                    
                                     </div>
-                                    <span data-to="152">0</span>
-                                    <p>In Progress</p>
+                                    <span data-to="{{rejected}}">0</span>
+                                    <p>Rejected</p>
                                 </div>
                             </div>
                             
                             <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="1.1s">
                                 <div class="fact-item text-center last">
                                     <div class="fact-icon">
-                                        <i class="fa fa-clock-o fa-lg"></i>
+                                        <i class="fa fa-refresh fa-lg"></i>
                                     </div>
-                                    <span data-to="2500">0</span>
+                                    <span data-to="{{forwarded}}">0</span>
                                     <p>Forwarded</p>
                                 </div>
                             </div>
@@ -309,10 +309,10 @@
                             <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="1.3s">
                                 <div class="fact-item text-center last">
                                     <div class="fact-icon">
-                                        <i class="fa fa-trophy fa-lg"></i>
+                                        <i class="fa fa-clock-o fa-lg"></i>
                                     </div>
-                                    <span data-to="150">0</span>
-                                    <p>No Response</p>
+                                    <span data-to="{{ pending }}">0</span>
+                                    <p>Pending</p>
                                 </div>
                             </div>
     
@@ -320,7 +320,7 @@
                     </div>
                 </div>
             </section>
-
+            
 
             <!-- <nav class="project-filter clearfix text-center wow fadeInLeft"  data-wow-delay="0.5s">
                 <ul class="list-inline">

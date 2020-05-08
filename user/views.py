@@ -37,47 +37,66 @@ def index(request):
             request.session['userid'] = check.id
             us_id = RegisterModel.objects.get(id=check.id)
             complaints = Post_Complaint.objects.all()
+            pending = Post_Complaint.objects.count()
+            forwarded = ForwardedModel.objects.count()
+            rejected = CompletedModel.objects.filter( status='Rejected' ).count()
+            resolved = CompletedModel.objects.filter( status='Resolved' ).count()
             n = len(complaints)
             nSlides = n//4 + ceil((n/4)-(n//4))
-            context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id}
+            context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved}
             return render(request,'admin.html',context)
         try:
             check = RegisterModel.objects.get(userid=usid, password=pswd)
             request.session['userid'] = check.id
             us_id = RegisterModel.objects.get(id=check.id)
             complaints = Post_Complaint.objects.all()
-            context = {"complaints":complaints,"obje":us_id}
+            notifications = Notification.objects.all()
+            pending = Post_Complaint.objects.count()
+            forwarded = ForwardedModel.objects.count()
+            rejected = CompletedModel.objects.filter( status='Rejected' ).count()
+            resolved = CompletedModel.objects.filter( status='Resolved' ).count()
+            context = {"complaints":complaints,"obje":us_id,"notifications":notifications,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved}
             return render(request,'login.html',context)
         except:
             pass
     complaints = Post_Complaint.objects.all()
     n = len(complaints)
     nSlides = n//4 + ceil((n/4)-(n//4))
-    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints}
+    pending = Post_Complaint.objects.count()
+    forwarded = ForwardedModel.objects.count()
+    rejected = CompletedModel.objects.filter( status='Rejected' ).count()
+    resolved = CompletedModel.objects.filter( status='Resolved' ).count()
+    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved}
     return render(request, 'index.html',context)
 
-
-def all_comp(request):
-    allProds = []
-    catprods = Post_Complaint.objects.values('category', 'id')
-    cats = {item['category'] for item in catprods}
-    for cat in cats:
-        prod = Post_Complaint.objects.filter(category=cat)
-        n = len(prod)
-        nSlides = n // 4 + ceil((n / 4) - (n // 4))
-        allProds.append([prod, range(1, nSlides), nSlides])
-    params = {'allProds':allProds}
-    return render(request, 'all_complaints.html', params)
     
-
-
-
 
 def user_page(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
     return render(request, 'login.html', {'obje': us_id})
 
+
+def post_comp(request):
+    if request.method == "POST":
+        forms = ComplaintForms(request.POST, request.FILES)
+        if forms.is_valid():
+            userid = request.session['userid']
+            current_user = RegisterModel.objects.get(id=userid)
+            instance = forms.save(commit=False)
+            instance.user_id = current_user
+            use=instance.save()
+            complaints = Post_Complaint.objects.all()
+            context = {"complaints":complaints,"obje":use}
+            return render(request,'login.html',context)
+    else:
+        forms = ComplaintForms()
+        comp = Post_Complaint.objects.all()
+    return render(request, 'login.html', {'obje': forms},{'ob':comp})
+
+
+
+#Admin section
 def comp(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
@@ -157,26 +176,6 @@ def notification(request):
     
 
 
-def post_comp(request):
-    if request.method == "POST":
-        forms = ComplaintForms(request.POST, request.FILES)
-        if forms.is_valid():
-            userid = request.session['userid']
-            current_user = RegisterModel.objects.get(id=userid)
-            instance = forms.save(commit=False)
-            instance.user_id = current_user
-            use=instance.save()
-            complaints = Post_Complaint.objects.all()
-            context = {"complaints":complaints,"obje":use}
-            return render(request,'login.html',context)
-    else:
-        forms = ComplaintForms()
-        comp = Post_Complaint.objects.all()
-    return render(request, 'login.html', {'obje': forms},{'ob':comp})
-
-
-
-
 def notify(request):
     if request.method == "POST":
         forms = NotificationForms(request.POST, request.FILES)
@@ -211,7 +210,7 @@ def send_email(request,pk):
     mail.close()
     ForwardedModel.objects.create(userd=pk,category2=c,title2=t,img2=i,description2=d,location2=l)
     Post_Complaint.objects.filter(id=pk).delete()
-    return redirect('admin')
+    return redirect('comp')
 
 
 
@@ -242,6 +241,6 @@ def complaint_status_update(request,pk,x):
         ForwardedModel.objects.filter(id=pk).update(status="Not Resolved")
         CompletedModel.objects.create(comp_id=pk,category=c,title=t,img=i,description=d,location=l,status="Rejected")
         ForwardedModel.objects.filter(id=pk).delete()
-    return redirect('admin')
+    return redirect('forComp')
 
 

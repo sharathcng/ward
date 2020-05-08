@@ -29,7 +29,7 @@ urlpatterns = [
     path('user_page',views.user_page, name="user_page"),
     path('post_comp',views.post_comp, name="post_comp"),
     path('comp',views.comp,name="comp"),
-    path('all_comp',views.all_comp,name="all_comp"),
+
     path('admin',views.admin,name="admin"),
     path('notification',views.notification,name="notification"),
     path('notify',views.notify,name="notify"),
