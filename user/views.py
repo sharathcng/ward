@@ -64,9 +64,10 @@ def index(request):
     nSlides = n//4 + ceil((n/4)-(n//4))
     pending = Post_Complaint.objects.count()
     forwarded = ForwardedModel.objects.count()
+    notifications = Notification.objects.all()
     rejected = CompletedModel.objects.filter( status='Rejected' ).count()
     resolved = CompletedModel.objects.filter( status='Resolved' ).count()
-    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved}
+    context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"notifications":notifications,"complaints":complaints,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved}
     return render(request, 'index.html',context)
 
     

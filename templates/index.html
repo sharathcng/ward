@@ -675,10 +675,17 @@
                 <div class="row">
 
                     <div class="section-title text-center wow fadeInUp">
-                        <h2>NOTIFICATIONS</h2>    
-                        <p>All notifications related your ward is posted here.</p>
-                    </div>
-
+                        <h2>NOTIFICATIONS</h2>   
+                    </div> 
+                        <!-- <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p> -->
+                        {% for i in notifications %}
+                        <div class="pricing-table ">
+                            <ul >
+                                <li>*{{i.N_title}}</li>
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    
                     <!-- <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp">
                         <div class="pricing-table text-center">
                             <div class="price">
@@ -686,12 +693,10 @@
                                 <span class="value"><small>$</small><strong>19</strong>/MO</span>
                             </div>
                             <ul class="text-center">
-                                <li>Feature N0 1</li>
-                                <li>Feature N0 2</li>
-                                <li>Feature N0 3</li>
-                                <li>Feature N0 4</li>
+                                <li>*{{i.N_title}}</li>
+                                
                             </ul>
-                            <a href="#" class="btn btn-price">Buy Now</a>
+                            <a href="#" class="btn btn-price">*{{i.N_title}}</a>
                         </div>
                     </div> 
 
@@ -1082,11 +1087,11 @@
                 <div class="sign-in-htm">
                     <div class="group">
                         <label  class="label">Username</label>
-                        <input name="name" type="text" class="input">
+                        <input name="name" type="text" class="input" required="">
                     </div>
                     <div class="group">
                         <label class="label">Password</label>
-                        <input name="password" type="password" class="input" data-type="password">
+                        <input name="password" type="password" class="input" data-type="password" required="">
                     </div>
                     <div class="group">
                         <input id="check" type="checkbox" class="check" checked>
@@ -1106,15 +1111,15 @@
                         {% csrf_token %}
                     <div class="group">
                         <label  class="label">Name</label>
-                        <input name="name" type="text" class="input"  >
+                        <input name="name" type="text" class="input" required="" >
                     </div>
                     <div class="group">
                         <label class="label">UserID</label>
-                        <input name="userid" type="text" class="input">
+                        <input name="userid" type="text" class="input" required="">
                     </div>
                     <div class="group">
                         <label  class="label">Password</label>
-                        <input name="password" type="password" class="input" data-type="password">
+                        <input name="password" type="password" class="input" data-type="password" required="">
                     </div>
                     <!-- <div class="group">
                         <label for="pass" class="label">Confirm Password</label>
@@ -1126,11 +1131,11 @@
                     </div>
                     <div class="group">
                         <label class="label">Phone number</label>
-                        <input name="mobilenum" type="text" class="input">
+                        <input name="mobilenum" type="text" class="input" required="">
                     </div>
                     <div class="group">
                         <label  class="label">Email Address</label>
-                        <input name="email" type="text" class="input" placeholder="example@gmail.com">
+                        <input name="email" type="text" class="input" placeholder="example@gmail.com" required="">
                     </div>
                     <div class="group">
                         <label class="label">Select Gender:</label>

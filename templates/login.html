@@ -171,7 +171,8 @@
                 {% block userblock %}
                     <div class="mobile-device">
                         <!-- <img src="{{ obje.profile_pic.url }}" /> -->
-                        <img data-wow-delay="0.3s" class="img-responsive black  wow fadeInLeftBig" src="{{ obje.profile_pic.url }}" alt="iPhone Black" style="width:400px;height:336px;border-radius: 200px;"> 
+                        
+                        <img data-wow-delay="0.3s" data-toggle="tooltip" data-placement="top" title="Profile picture" class="img-responsive black  wow fadeInLeftBig" src="{{ obje.profile_pic.url }}" data-content="Profile pic" alt="iPhone Black" style="width:400px;height:336px;border-radius: 200px;"> 
                         <!-- <img data-wow-delay="0.5s" class="img-responsive white  wow fadeInLeftBig" src="{% static 'img/icons/iphone-white.png' %}" alt="iPhone White">   -->
                     </div>
                    
@@ -179,10 +180,10 @@
                     <h3><u>My Profile</u></h3>
                   
                     <ul>
-                        <li class="fa fa-empire fa-lg">&nbsp;&nbsp;{{obje.name}}</li><br>
-                        &nbsp; <li class="fa fa-mobile fa-lg">&nbsp;&nbsp;{{obje.mobilenum}}</li><br>
-                        <li class="fa fa-sign-in fa-lg">&nbsp;&nbsp;{{obje.email}}</li><br>
-                        <li class="fa fa-male fa-lg">&nbsp;&nbsp;{{obje.gender}}</li><br>
+                        <li class="fa fa-empire fa-lg" data-toggle="tooltip" data-placement="top" title="User Name">&nbsp;&nbsp;{{obje.name}}</li><br>
+                        &nbsp; <li class="fa fa-mobile fa-lg" data-toggle="tooltip" data-placement="top" title="Mobile number">&nbsp;&nbsp;{{obje.mobilenum}}</li><br>
+                        <li class="fa fa-sign-in fa-lg" data-toggle="tooltip" data-placement="top" title="Email">&nbsp;&nbsp;{{obje.email}}</li><br>
+                        <li class="fa fa-male fa-lg" data-toggle="tooltip" data-placement="top" title="Gender">&nbsp;&nbsp;{{obje.gender}}</li><br>
                     </ul>
                     {% endblock %}
                 </div>
@@ -725,7 +726,7 @@
                         </div>
                         <div class="group">
                             <label  class="label">Complaint Title</label>
-                            <input name="title" type="text" class="input" placeholder="Complaint Title">
+                            <input name="title" type="text" class="input" placeholder="Complaint Title" required="">
                         </div>
                         <div class="group">
                             <label class="label">Complaint Image</label>
@@ -733,11 +734,11 @@
                         </div>
                         <div class="group">
                             <label  class="label">Complaint Description</label>
-                            <textarea name="description"  class="input" placeholder="Write your complaint details here" ></textarea>
+                            <textarea name="description"  class="input" placeholder="Write your complaint details here" required=""></textarea>
                         </div>
                         <div class="group">
                             <label class="label">Complaint Address</label>
-                            <textarea name="location" type="text" class="input" placeholder="Enter complaint address"></textarea>
+                            <textarea name="location" type="text" class="input" placeholder="Enter complaint address" required=""></textarea>
                         </div>
                         <!-- <div class="group">
                             <label class="label">Date</label>
@@ -780,7 +781,7 @@
         <!--
         #quotes
         ========================== -->
-        <br><br><br>
+        
         <section id="quotes">
             <div class="container">
                 <div class="row wow zoomIn">
@@ -804,16 +805,17 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="section-title text-center wow fadeInUp"><br><br><br>
-                        <h2>NOTIFICATIONS</h2>    
+                    <div class="section-title text-center wow fadeInUp">
+                        <h2>NOTIFICATIONS</h2>   
+                    </div> 
                         <!-- <p>Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Mauris blandit aliquet elit, eget tincidunt.</p> -->
-                        <p>All notifications related your ward is posted here.</p>
                         {% for i in notifications %}
-                        <a href="#">
-                        <h3 class="card-text">*{{i.N_title}}</h3>
-                        </a>
+                        <div class="pricing-table ">
+                            <ul >
+                                <li>*{{i.N_title}}</li>
+                            </ul>
+                        </div>
                         {% endfor %}
-                    </div>
 
                     <!-- <div class="col-md-3 col-sm-6 col-xs-12 wow fadeInUp">
                         <div class="pricing-table text-center">
