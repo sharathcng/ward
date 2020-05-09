@@ -41,4 +41,8 @@ urlpatterns = [
     path('solution/(?P<pk>\d+)/$',views.solution,name="solution"),
     path('<int:pk><int:x>/',views.complaint_status_update, name="complaint_status_update"),
 
+    path('pdf_view/(?P<pk>\d+)/$', views.ViewPDF.as_view(), name="pdf_view"),
+    path('pdf_download/(?P<pk>\d+)/$', views.DownloadPDF.as_view(), name="pdf_download"),
+    path('delete/(?P<pk>\d+)/$', views.deleteNotification, name="delete"),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

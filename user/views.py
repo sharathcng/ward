@@ -11,6 +11,11 @@ from user.models import ForwardedModel
 from django.core.mail import send_mail
 from user.models import CompletedModel
 from math import ceil
+from io import BytesIO
+from django.http import HttpResponse
+from django.template.loader import get_template
+from django.views import View
+from xhtml2pdf import pisa
 
 
 # Create your views here.
@@ -171,7 +176,8 @@ def notification(request):
     usid = request.session['userid']
     us_id = RegisterModel.objects.get(id=usid)
     complaints = Post_Complaint.objects.all()
-    context = {"complaints":complaints,"obje":us_id}
+    notifications = Notification.objects.all()
+    context = {"complaints":complaints,"obje":us_id,"notifications":notifications}
     return render(request, 'notification.html', context)
 
     
@@ -245,3 +251,50 @@ def complaint_status_update(request,pk,x):
     return redirect('forComp')
 
 
+#pdf generator
+
+def render_to_pdf(template_src, context_dict={}):
+	template = get_template(template_src)
+	html  = template.render(context_dict)
+	result = BytesIO()
+	pdf = pisa.pisaDocument(BytesIO(html.encode("ISO-8859-1")), result)
+	if not pdf.err:
+		return HttpResponse(result.getvalue(), content_type='application/pdf')
+	return None
+
+
+class ViewPDF(View):
+	def get(self, request, *args, **kwargs):
+		notify = Notification.objects.get(id=kwargs['pk'])
+		title = notify.N_title
+		img = notify.N_img
+		desc = notify.N_description
+		date = notify.N_date
+		data = {"title":title,"img":img,"desc":desc,"date":date}
+		pdf = render_to_pdf('pdf.html', data)
+		return HttpResponse(pdf, content_type='application/pdf')
+
+
+
+#Automaticly downloads to PDF file
+class DownloadPDF(View):
+	def get(self, request, *args, **kwargs):
+		notify = Notification.objects.get(id=kwargs['pk'])
+		title = notify.N_title
+		img = notify.N_img
+		desc = notify.N_description
+		date = notify.N_date
+		data = {"title":title,"img":img,"desc":desc,"date":date}
+		pdf = render_to_pdf('pdf.html', data)
+
+		response = HttpResponse(pdf, content_type='application/pdf')
+		filename = "Invoice_%s.pdf" %("12341231")
+		content = "attachment; filename='%s'" %(filename)
+		response['Content-Disposition'] = content
+		return response
+
+
+#delete notification
+def deleteNotification(request,pk):
+    Notification.objects.filter(id=pk).delete()
+    return redirect('notification')

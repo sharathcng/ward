@@ -35,26 +35,11 @@
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="icon-menu"></span>
         </button>
-        <!-- <ul class="navbar-nav mr-lg-2">
-          <li class="nav-item nav-search d-none d-lg-block">
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="search">
-                  <i class="icon-search"></i>
-                </span>
-              </div>
-              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search" aria-describedby="search">
-            </div>
-          </li>
-        </ul> -->
+        
         <ul class="navbar-nav navbar-nav-right">
-            <!-- <li class="nav-item dropdown d-lg-flex d-none">
-                <button type="button" class="btn btn-info font-weight-bold">+ Create New</button>
-            </li> -->
+           
           <li class="nav-item dropdown d-flex">
-            <!-- <a class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" id="messageDropdown" href="#" data-toggle="dropdown">
-              <i class="icon-air-play mx-0"></i>
-            </a> -->
+            
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="messageDropdown">
               <p class="mb-0 font-weight-normal float-left dropdown-header">Messages</p>
               <a class="dropdown-item preview-item">
@@ -101,19 +86,13 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
               <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
-              <!-- <a class="dropdown-item preview-item">               
-                  <i class="icon-head"></i> Profile
-              </a> -->
+             
               <a class="dropdown-item preview-item" href="/">
                 <i class="icon-heart"></i> Logout
               </a>
             </div>
           </li>
-          <!-- <li class="nav-item dropdown mr-4 d-lg-flex d-none">
-            <a class="nav-link count-indicatord-flex align-item s-center justify-content-center" href="#">
-              <i class="icon-grid"></i>
-            </a>
-          </li> -->
+          
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="icon-menu"></span>
@@ -149,19 +128,7 @@
               <span class="menu-title">View Complaints</span>
             </a>
           </li>
-          <!--<li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="{% static 'pages/forms/complaints.html' %}" aria-expanded="false" aria-controls="ui-basic">
-               <i class="icon-disc menu-icon"></i>
-              <span class="menu-title">View Complaints</span>
-              <i class="menu-arrow"></i>
-            </a>
-             <div class="collapse" id="ui-basic">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{% static 'pages/ui-features/buttons.html' %}">Buttons</a></li>
-                <li class="nav-item"> <a class="nav-link" href="{% static 'pages/ui-features/typography.html' %}">Typography</a></li>
-              </ul>
-            </div> 
-          </li>-->
+         
           <li class="nav-item">
             <a class="nav-link" href="{% url 'forComp' %}">
               <i class="icon-help menu-icon"></i>
@@ -194,7 +161,6 @@
       </nav>
       <!-- partial -->
       <div class="main-panel">
-        
         <div class="content-wrapper">
             <div class="row">
               <div class="col-md-6 grid-margin stretch-card">
@@ -224,16 +190,373 @@
                     </form>
                   </div>
                 </div>
+
+
+                <div class="card">
+                  <div class="card-body">
+                    <h2><u><b>Published notifications </b></u></h2>
+                    <p class="card-description">
+
+                      <style>
+                        /*==========  Mobile First Method  ==========*/
+
+                        /* Custom, iPhone Retina */ 
+                        @media only screen and (min-width : 320px) {
+                            
+                        }
+                    
+                        /* Extra Small Devices, Phones */ 
+                        @media only screen and (min-width : 480px) {
+                    
+                        }
+                    
+                        /* Small Devices, Tablets */
+                        @media only screen and (min-width : 768px) {
+                    
+                        }
+                    
+                        /* Medium Devices, Desktops */
+                        @media only screen and (min-width : 992px) {
+                    
+                        }
+                    
+                        /* Large Devices, Wide Screens */
+                        @media only screen and (min-width : 1200px) {
+                    
+                        }
+                    
+                    
+                    
+                        /*==========  Non-Mobile First Method  ==========*/
+                    
+                        /* Large Devices, Wide Screens */
+                        @media only screen and (max-width : 1200px) {
+                    
+                        }
+                    
+                        /* Medium Devices, Desktops */
+                        @media only screen and (max-width : 992px) {
+                    
+                        }
+                    
+                        /* Small Devices, Tablets */
+                        @media only screen and (max-width : 768px) {
+                    
+                        }
+                    
+                        /* Extra Small Devices, Phones */ 
+                        @media only screen and (max-width : 480px) {
+                    
+                        }
+                    
+                        /* Custom, iPhone Retina */ 
+                        @media only screen and (max-width : 320px) {
+                            
+                        }
+                        
+                        
+                        
+                    /*=====================================================
+                    =            Bootstrap 2.3.2 Media Queries            =
+                    =====================================================*/
+                    @media only screen and (max-width : 1200px) {
+                    
+                    }
+                    
+                    @media only screen and (max-width : 979px) {
+                    
+                    }
+                    
+                    @media only screen and (max-width : 767px) {
+                    
+                    }
+                    
+                    @media only screen and (max-width : 480px) {
+                    
+                    }
+                    
+                    @media only screen and (max-width : 320px) {
+                    
+                    }
+                    
+                    
+                        /* default styles here for older browsers. 
+                           I tend to go for a 600px - 960px width max but using percentages
+                        */
+                        @media only screen and (min-width:960px){
+                            /* styles for browsers larger than 960px; */
+                        }
+                        @media only screen and (min-width:1440px){
+                            /* styles for browsers larger than 1440px; */
+                        }
+                        @media only screen and (min-width:2000px){
+                            /* for sumo sized (mac) screens */
+                        }
+                        @media only screen and (max-device-width:480px){
+                           /* styles for mobile browsers smaller than 480px; (iPhone) */
+                        }
+                        @media only screen and (device-width:768px){
+                           /* default iPad screens */
+                        }
+                        /* different techniques for iPad screening */
+                        @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+                          /* For portrait layouts only */
+                        }
+                    
+                        @media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+                          /* For landscape layouts only */
+                        }
+                    
+                      /*******Nuevos mensajes de error******/
+                      
+                    .new-message-box {
+                        margin: 15px 0;
+                        padding-left: 20px;
+                        margin-bottom: 25px!important;
+                    }
+                    
+                    .new-message-box p{
+                        font-size: 1.15em;
+                        font-weight: 600;
+                    }
+                    
+                    .info-tab {
+                        width: 40px;
+                        height: 40px;
+                        display: inline-block;
+                        position: relative;
+                        top: 8px;
+                    }
+                    
+                    .info-tab {
+                        float: left;
+                        margin-left: -23px;
+                    }
+                    
+                    .info-tab i::before {
+                        width: 24px;
+                        height: 24px;
+                        box-shadow: inset 12px 0 13px rgba(0,0,0,0.5);
+                    }
+                    
+                    .info-tab i::after {
+                        width: 0;
+                        height: 0;
+                        border: 12px solid transparent;
+                        border-bottom-color: #fff;
+                        border-left-color: #fff;
+                        bottom: -18px;
+                    }
+                    
+                    .info-tab i::before, .info-tab i::after {
+                        content: "";
+                        display: inline-block;
+                        position: absolute;
+                        left: 0;
+                        bottom: -17px;
+                        transform: rotateX(60deg);
+                    }
+                    
+                    .note-box, .warning-box, .tip-box-success, .tip-box-danger, .tip-box-warning, .tip-box-info, .tip-box-alert {
+                        padding: 12px 8px 3px 26px;
+                    }
+                    
+                    
+                    /***Success****/
+                    
+                    .new-message-box-success {
+                        background: #eeeeee;
+                        padding: 3px;
+                        margin: 10px 0;
+                    }
+                    
+                    .tip-icon-success {
+                        background: #8BC34A;
+                    }
+                    
+                    .tip-box-success {
+                        color: #33691E;
+                        background: #DCEDC8;
+                    }
+                    
+                    .tip-icon-success::before {
+                        font-size: 25px;
+                        content:"\f00c";
+                        top: 8px;
+                        left: 11px;
+                        font-family: FontAwesome;
+                        position: absolute;
+                        color: white;
+                    }
+                    
+                    .tip-icon-success i::before {
+                        background: #8BC34A;
+                    }
+                    
+                    
+                    /*******Danger*******/
+                    .new-message-box-danger {
+                        background: #eeeeee;
+                        padding: 3px;
+                        margin: 10px 0;
+                    }
+                    
+                    .tip-icon-danger {
+                        background: #f44336;
+                    }
+                    
+                    .tip-box-danger {
+                        color: #b71c1c;
+                        background: #FFCCBC;
+                    }
+                    
+                    .tip-icon-danger::before {
+                        font-size: 25px;
+                        content:"\f00d";
+                        top: 8px;
+                        left: 11px;
+                        font-family: FontAwesome;
+                        position: absolute;
+                        color: white;
+                    }
+                    
+                    .tip-icon-danger i::before {
+                        background: #f44336;
+                    }
+                    
+                    /*******warning*******/
+                    .new-message-box-warning {
+                        background: #eeeeee;
+                        padding: 3px;
+                        margin: 10px 0;
+                    }
+                    
+                    .tip-icon-warning {
+                        background: #FFEB3B;
+                    }
+                    
+                    .tip-box-warning {
+                        color: #212121;
+                        background: #FFF9C4;
+                    }
+                    
+                    .tip-icon-warning::before {
+                        font-size: 25px;
+                        content:"\f071";
+                        top: 8px;
+                        left: 11px;
+                        font-family: FontAwesome;
+                        position: absolute;
+                        color: #212121;
+                    }
+                    
+                    .tip-icon-warning i::before {
+                        background: #FFEB3B;
+                    }
+                    
+                    /*******info*******/
+                    .new-message-box-info {
+                        background: #eeeeee;
+                        padding: 3px;
+                        margin: 10px 0;
+                    }
+                    
+                    .tip-box-info {
+                        color: #01579B;
+                        background: #B3E5FC;
+                    }
+                    
+                    .tip-icon-info {
+                        background: #03A9F4;
+                    }
+                    
+                    .tip-icon-info::before {
+                        font-size: 25px;
+                        content:"\f129";
+                        top: 8px;
+                        left: 11px;
+                        font-family: FontAwesome;
+                        position: absolute;
+                        color: white
+                    }
+                    
+                    .tip-icon-info i::before {
+                        background: #03A9F4;
+                    }
+                    
+                    
+                    /*******info*******/
+                    .new-message-box-alert {
+                        background: #FF6F00;
+                        padding: 3px;
+                        margin: 10px 0;
+                    }
+                    
+                    .tip-box-alert {
+                        color: #212121;
+                        background: #FFF8E1;
+                    }
+                    
+                    .tip-icon-alert {
+                        background: #FF6F00;
+                    }
+                    
+                    .tip-icon-alert::before {
+                        font-size: 25px;
+                        content:"\f06a";
+                        top: 8px;
+                        left: 11px;
+                        font-family: FontAwesome;
+                        position: absolute;
+                        color: white
+                    }
+                    
+                    .tip-icon-alert i::before {
+                        background: #FF6F00;
+                    }
+
+                </style>
+
+
+
+
+                    {% for i in notifications %}
+                    <div class="container-fluid text-center">
+                        <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+                            <div class="new-message-box">
+                            <div class="new-message-box-info">
+                                <div class="info-tab tip-icon-info" title="error"><i></i></div>
+                                <div class="tip-box-info">
+                                <p>{{i.N_title}}<br>
+                                    <a class="btn btn-sm" href="{% url 'pdf_view' i.id %}" target="_blank"><b>View notification</b></a>
+                                    <a class="btn btn-sm" href="{% url 'delete' i.id %}"><b>Delete notification</b></a>
+                                </p>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <!-- -->
+                    </div> 
+                    {% endfor %}
+                  
+
+
+                      
+                    </p>
+                  </div>
+                </div>
+
+
+
               </div>
             </div>
           </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
         <footer class="footer">
-          <div class="d-sm-flex justify-content-center justify-content-sm-between">
-            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2019 <a href="https://www.bootstrapdash.com/" target="_blank" class="text-muted">bootstrapdash</a>. All rights reserved.</span>
-            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="icon-heart"></i></span>
-          </div>
+          
         </footer>
         <!-- partial -->
       </div>
