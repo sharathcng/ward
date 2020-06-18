@@ -793,6 +793,8 @@
         <script src="{% static 'js/wow.min.js' %}"></script>
         <!-- theme custom scripts -->
         <script src="{% static 'js/main.js' %}"></script>
+        <!-- validation scripts -->
+        <script src="{% static 'js/validation.js' %}"></script>
     </body>
     <section id="loginform"></section>
     <style type="text/css">
@@ -1000,15 +1002,17 @@
                 </div>
                 </form>
                 <div class="sign-up-htm">
-                    <form  method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+                    <form name="myForm" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
                         {% csrf_token %}
                     <div class="group">
                         <label  class="label">Name</label>
                         <input name="name" type="text" class="input" required="" >
+                    
                     </div>
                     <div class="group">
                         <label class="label">UserID</label>
                         <input name="userid" type="text" class="input" required="">
+                        {{form.userid.error}}
                     </div>
                     <div class="group">
                         <label  class="label">Password</label>

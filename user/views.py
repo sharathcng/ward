@@ -23,6 +23,18 @@ from xhtml2pdf import pisa
 def register(request):
     if request.method=="POST":
         forms=RegisterForms(request.POST, request.FILES)
+        # usid=request.POST.get('userid')
+        # email = request.POST.get('email')
+        # mbnum = request.POST.get('mobilenum')
+        # password = request.POST.get('password')
+        # registerList = [usid,email,mbnum,password]
+        # print(registerList)
+        # for i in registerList :
+
+        #     var1 = RegisterModel.objects.all().values()
+        #     print(var1.userid)
+        #     if i in var1:
+        #         print(i)
         if forms.is_valid():
             user = forms.save()
             complaints = Post_Complaint.objects.all()
@@ -46,10 +58,13 @@ def index(request):
             forwarded = ForwardedModel.objects.count()
             rejected = CompletedModel.objects.filter( status='Rejected' ).count()
             resolved = CompletedModel.objects.filter( status='Resolved' ).count()
+            labels = ['pending','forwarded','completed']
+            data = [pending,forwarded,resolved]
             n = len(complaints)
             nSlides = n//4 + ceil((n/4)-(n//4))
-            context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved}
+            context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved,'labels': labels,'data': data}
             return render(request,'admin.html',context)
+            # return redirect("status_graph")
         try:
             check = RegisterModel.objects.get(userid=usid, password=pswd)
             request.session['userid'] = check.id
@@ -298,3 +313,4 @@ class DownloadPDF(View):
 def deleteNotification(request,pk):
     Notification.objects.filter(id=pk).delete()
     return redirect('notification')
+
