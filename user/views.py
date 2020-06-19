@@ -23,23 +23,13 @@ from xhtml2pdf import pisa
 def register(request):
     if request.method=="POST":
         forms=RegisterForms(request.POST, request.FILES)
-        # usid=request.POST.get('userid')
-        # email = request.POST.get('email')
-        # mbnum = request.POST.get('mobilenum')
-        # password = request.POST.get('password')
-        # registerList = [usid,email,mbnum,password]
-        # print(registerList)
-        # for i in registerList :
-
-        #     var1 = RegisterModel.objects.all().values()
-        #     print(var1.userid)
-        #     if i in var1:
-        #         print(i)
-        if forms.is_valid():
-            user = forms.save()
-            complaints = Post_Complaint.objects.all()
-            context = {"complaints":complaints,"obje":user}
-            return render(request,'login.html',context)
+        usid=request.POST.get('userid')
+        if(usid != RegisterModel.objects.get(userid=usid)):
+            if forms.is_valid():
+                user = forms.save()
+                complaints = Post_Complaint.objects.all()
+                context = {"complaints":complaints,"obje":user}
+                return render(request,'login.html',context)
     else:
         forms=RegisterForms()
     return render(request,'index.html',{'form':forms})
@@ -58,8 +48,8 @@ def index(request):
             forwarded = ForwardedModel.objects.count()
             rejected = CompletedModel.objects.filter( status='Rejected' ).count()
             resolved = CompletedModel.objects.filter( status='Resolved' ).count()
-            labels = ['pending','forwarded','completed']
-            data = [pending,forwarded,resolved]
+            labels = ['pending','forwarded','resolved','rejected']
+            data = [pending,forwarded,resolved,rejected]
             n = len(complaints)
             nSlides = n//4 + ceil((n/4)-(n//4))
             context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved,'labels': labels,'data': data}
@@ -91,6 +81,22 @@ def index(request):
     return render(request, 'index.html',context)
 
     
+def admin_(request):
+    if usid == 'admin' and pswd == 'admin':
+            check = RegisterModel.objects.get(userid=usid, password=pswd)
+            request.session['userid'] = check.id
+            us_id = RegisterModel.objects.get(id=check.id)
+            complaints = Post_Complaint.objects.all()
+            pending = Post_Complaint.objects.count()
+            forwarded = ForwardedModel.objects.count()
+            rejected = CompletedModel.objects.filter( status='Rejected' ).count()
+            resolved = CompletedModel.objects.filter( status='Resolved' ).count()
+            labels = ['pending','forwarded','completed']
+            data = [pending,forwarded,resolved]
+            n = len(complaints)
+            nSlides = n//4 + ceil((n/4)-(n//4))
+            context = {'no_of_slides':nSlides, 'range': range(1,nSlides),"complaints":complaints,"obje":us_id,'pending':pending,'forwarded':forwarded,'rejected':rejected,'resolved':resolved,'labels': labels,'data': data}
+            return render(request,'admin.html',context)
 
 def user_page(request):
     usid = request.session['userid']
@@ -220,7 +226,7 @@ def send_email(request,pk):
     mail = smtplib.SMTP('smtp.gmail.com', 587)
     mail.ehlo()
     mail.starttls()
-    mail.login('cngsharath@gmail.com', '9480473080')
+    mail.login('cngsharath@gmail.com', '9480473081')
     if c == "Garbage":
         mail.sendmail( 'cngsharath@gmail.com', 'sachin.s.kabadi10@gmail.com',content)
     elif c == "Sanitory":

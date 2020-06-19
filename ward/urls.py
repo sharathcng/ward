@@ -31,6 +31,7 @@ urlpatterns = [
     path('comp',views.comp,name="comp"),
 
     path('admin',views.admin,name="admin"),
+    path('admin_',views.admin,name="admin_"),
     path('notification',views.notification,name="notification"),
     path('notify',views.notify,name="notify"),
     path('forComp',views.forComp,name="forComp"),

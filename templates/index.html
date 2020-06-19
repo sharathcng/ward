@@ -265,7 +265,7 @@
             <div class="carousel-item active">
               <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="card" style="width: 18rem;">
-                  <img src='{{ complaints.0.img.url }}' class="card-img-top" alt="...">
+                  <img src='{{ complaints.0.img.url }}' class="card-img-top" width="50px" height="100px">
                   <div class="card-body">
                     <p class="card-text">Title : {{complaints.0.title}}</p>
                       <p class="card-text">Posted by :{{complaints.0.user_id.name}}</p>
@@ -278,7 +278,7 @@
               {% for i in complaints|slice:"1:"%}
               <div class="col-xs-3 col-sm-3 col-md-3">
                 <div class="card" style="width: 18rem;">
-                  <img src='{{ i.img.url }}' class="card-img-top" alt="...">
+                  <img src='{{ i.img.url }}' class="card-img-top" width="50px" height="100px">
                   <div class="card-body">
                     <p class="card-text">Title : {{i.title}}</p>
                     <p class="card-text">Posted by :{{i.user_id.name}}</p>
@@ -794,7 +794,7 @@
         <!-- theme custom scripts -->
         <script src="{% static 'js/main.js' %}"></script>
         <!-- validation scripts -->
-        <script src="{% static 'js/validation.js' %}"></script>
+        <!-- <script src="{% static 'js/validation.js' %}"></script> -->
     </body>
     <section id="loginform"></section>
     <style type="text/css">
@@ -1002,7 +1002,7 @@
                 </div>
                 </form>
                 <div class="sign-up-htm">
-                    <form name="myForm" method="post" action="{% url 'register' %}" enctype="multipart/form-data">
+                    <form name="RegForm" method="post" action="{% url 'register' %}" enctype="multipart/form-data" >
                         {% csrf_token %}
                     <div class="group">
                         <label  class="label">Name</label>
@@ -1012,7 +1012,7 @@
                     <div class="group">
                         <label class="label">UserID</label>
                         <input name="userid" type="text" class="input" required="">
-                        {{form.userid.error}}
+                        {{forms.validation}}
                     </div>
                     <div class="group">
                         <label  class="label">Password</label>
@@ -1064,7 +1064,4 @@
             </div>
         </div>
     </div>
-
-
-
 </html>
